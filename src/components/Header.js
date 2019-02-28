@@ -6,11 +6,20 @@ const Header = (props) => {
 
     return (
         <div>
-            <h1>{branding}</h1>
+            <h1 style={headingStyle}>{branding}</h1>
         </div>
     );
 };
 
+// Styling
+const headingStyle = {
+    color: 'red',
+    margin: '20px',
+    fontSize: '28px'
+};
+
+
+// Prop Settings
 Header.defaultProps = {
     branding: 'My App'
 };
