@@ -3,6 +3,7 @@ import Contact from './Contact';
 
 class Contacts extends Component {
 
+    // State should always be at the top
     state = {
         contacts: [
             {
@@ -26,6 +27,16 @@ class Contacts extends Component {
         ]
     }
 
+    deleteContact = id => {
+        const { contacts } = this.state;
+
+        const newContacts = contacts.filter(contact => contact.id !== id);
+
+        this.setState({
+            contacts: newContacts
+        });
+    }
+
 
     render() {
         const { contacts } = this.state;
@@ -36,6 +47,7 @@ class Contacts extends Component {
                     <Contact
                         key={contact.id}
                         contact={contact}
+                        deleteClickHandler={this.deleteContact.bind(this, contact.id)}
                     />
                 ))}
             </React.Fragment>
