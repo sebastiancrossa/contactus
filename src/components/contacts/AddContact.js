@@ -57,6 +57,8 @@ class AddContact extends Component {
             phoneNumber: '',
             errors: {}
         });
+
+        this.props.history.push('/');
     }
 
     render() {
