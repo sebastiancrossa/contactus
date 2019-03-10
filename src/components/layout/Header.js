@@ -12,15 +12,21 @@ const Header = (props) => {
                 <div>
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-ie">
-                            <Link to="/" className="nav-link"><i className="fas fa-home"></i> Home</Link>
+                            <Link to="/" className="nav-link">
+                                <i className="fas fa-home"></i> Home
+                            </Link>
                         </li>
 
                         <li className="nav-ie">
-                            <Link to="/contact-add" className="nav-link"><i className="fas fa-add"></i> Add</Link>
+                            <Link to="/contact/add" className="nav-link">
+                                <i className="fas fa-add"></i> Add
+                            </Link>
                         </li>
 
                         <li className="nav-ie">
-                            <Link to="/about" className="nav-link"><i className="fas fa-question"></i> About</Link>
+                            <Link to="/about" className="nav-link">
+                                <i className="fas fa-question"></i> About
+                            </Link>
                         </li>
 
                     </ul>
