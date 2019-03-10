@@ -39,6 +39,7 @@ class AddContact extends Component {
             this.setState({ errors: { phone: 'Name is required' } });
             return;
         }
+        // MARK : END ERROR CHECK
 
         const newContact = {
             id: UUID(),
