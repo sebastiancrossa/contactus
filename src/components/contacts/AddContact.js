@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Consumer } from '../../context';
+import axios from 'axios';
 
 import TextInputGroup from '../layout/TextInputGroup'
 
@@ -9,11 +10,11 @@ class AddContact extends Component {
     state = {
         name: '',
         email: '',
-        phoneNumber: '',
+        phone: '',
         errors: {
             name: 'Name is required',
             email: 'Email is required',
-            phoneNumber: 'Phone number is required'
+            phone: 'Phone number is required'
         }
     }
 
@@ -22,7 +23,7 @@ class AddContact extends Component {
     onSubmit = (dispatch, e) => {
         e.preventDefault(); // prevents JS from submiting to a file
 
-        const { name, email, phoneNumber } = this.state;
+        const { name, email, phone } = this.state;
 
         // MARK : ERROR CHECK
         if (name === '') {
@@ -35,31 +36,34 @@ class AddContact extends Component {
             return;
         }
 
-        if (phoneNumber === '') {
+        if (phone === '') {
             this.setState({ errors: { phone: 'Name is required' } });
             return;
         }
+        // MARK : END ERROR CHECK
 
         const newContact = {
-            id: UUID(),
             name,
             email,
-            phoneNumber
+            phone
         };
 
-        dispatch({ type: 'ADD_CONTACT', payload: newContact });
+        axios.post('https://jsonplaceholder.typicode.com/users', newContact)
+            .then(res => dispatch({ type: 'ADD_CONTACT', payload: res.data }));
 
         // Will clear the state after submiting a new contact
         this.setState({
             name: '',
             email: '',
-            phoneNumber: '',
+            phone: '',
             errors: {}
         });
+
+        this.props.history.push('/');
     }
 
     render() {
-        const { name, email, phoneNumber, errors } = this.state;
+        const { name, email, phone, errors } = this.state;
 
         return (
             <Consumer>
@@ -92,12 +96,12 @@ class AddContact extends Component {
 
                                     <TextInputGroup
                                         label="Phone"
-                                        name="phoneNumber"
-                                        value={phoneNumber}
+                                        name="phone"
+                                        value={phone}
                                         type="tel"
                                         placeholder="Enter phone number..."
                                         onChange={this.onChange}
-                                        error={errors.phoneNumber}
+                                        error={errors.phone}
                                     />
 
                                     <input type="submit"
